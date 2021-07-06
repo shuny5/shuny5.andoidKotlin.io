@@ -18,14 +18,14 @@ class MainActivity : AppCompatActivity() {
         val passwordLogin: EditText = findViewById(R.id.passwordLogin)
         val signupReg: TextView = findViewById(R.id.loginReg)
 
-        button.setOnClickListener{
+        button.setOnClickListener {
 
-            if(emailLogin.text.trim().isNotEmpty() && passwordLogin.text.trim().isNotEmpty()){
-                
-                Toast.makeText(this, "Input Received",Toast.LENGTH_LONG).show()
+            if (emailLogin.text.trim().isNotEmpty() && passwordLogin.text.trim().isNotEmpty()) {
 
-            }else{
-                Toast.makeText(this, "Input Required",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Input Received", Toast.LENGTH_LONG).show()
+
+            } else {
+                Toast.makeText(this, "Input Required", Toast.LENGTH_LONG).show()
             }
         }
         signupReg.setOnClickListener {

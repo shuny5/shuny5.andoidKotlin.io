@@ -5,4 +5,7 @@
     <string name="singupReg">Don\'t have an account? Sign up now</string>
     <string name="signupReg">Don\'t have an account? Sign up here</string>
     <string name="registeration">Registeration</string>
+    <string name="home_title">welcome</string>
+    <string name="title_home">Welcome!</string>
+    <string name="tripName">Trip Ex</string>
 </resources>
