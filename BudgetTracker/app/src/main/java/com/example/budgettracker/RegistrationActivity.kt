@@ -1,5 +1,6 @@
 package com.example.budgettracker
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,23 +31,28 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     private fun addAccount() {
-        val emailLogin: EditText = findViewById(R.id.emailLogin)
+        val email: EditText = findViewById(R.id.emailLogin)
         val passwordLogin: EditText = findViewById(R.id.passwordLogin)
         val confirmPass: EditText = findViewById(R.id.confirmPass)
 
-//        val email = emailLogin.text.trim().toString()
         val password = passwordLogin.text.trim().toString()
         val passCon = confirmPass.text.trim().toString()
 
-        //val databaseHandler = Database(this)
+        val logSuccess = Intent(this, Home::class.java)
+        var helper = DatabaseHandler(applicationContext)
+        var db = helper.readableDatabase
+//        var rs = db.rawQuery("SELECT * FROM USERS", null)
 
-        if (emailLogin.text.trim().isNotEmpty() and passwordLogin.text.trim()
+        if (email.text.trim().isNotEmpty() and passwordLogin.text.trim()
                 .isNotEmpty() and confirmPass.text.trim().isNotEmpty()
         ) {
             if (password == passCon) {
-                //val status = databaseHandler.addUser(UserDatabase(0, email, password))
+                var cv = ContentValues()
+                cv.put("USERNAME", email.text.toString())
+                cv.put("PASSWORD", password)
+                db.insert("USERS", null, cv)
+
                 Toast.makeText(this, "Register Complete", Toast.LENGTH_LONG).show()
-                val logSuccess = Intent(this, Home::class.java)
                 startActivity(logSuccess)
             } else {
                 Toast.makeText(this, "Password does not match", Toast.LENGTH_LONG).show()
