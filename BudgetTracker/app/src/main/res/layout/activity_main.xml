@@ -57,15 +57,15 @@
                 android:layout_margin="10dp"
                 android:text="Login" />
 
-            <TextView
-                android:id="@+id/forgot_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="5dp"
-                android:textColor="@android:color/black"
-                android:text="@string/forgotPassword"
-                android:textAlignment="center" />
+<!--            <TextView-->
+<!--                android:id="@+id/forgot_password"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:padding="5dp"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:text="@string/forgotPassword"-->
+<!--                android:textAlignment="center" />-->
 
             <TextView
                 android:id="@+id/loginReg"

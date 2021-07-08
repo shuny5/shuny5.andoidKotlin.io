@@ -17,10 +17,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="50dp"
+        android:textSize="50sp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/title_home"
+        android:text="Welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <LinearLayout
@@ -37,7 +37,7 @@
             android:layout_gravity="left"
             android:layout_marginTop="15dp"
             android:layout_marginStart="75dp"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:layout_marginBottom="15dp"
             android:text="Trip Name"
 
@@ -272,6 +272,7 @@
             </TextView>
 
             <Button
+                android:id="@+id/addTrip"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

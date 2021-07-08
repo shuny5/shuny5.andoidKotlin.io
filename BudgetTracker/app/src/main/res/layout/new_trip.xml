@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A6919DA3"
     android:gravity="top"
     android:orientation="vertical">
-    <!--    tools:context=".NewTrip">-->
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/title_home"
+        android:text="Welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="60dp" />
+        android:textSize="60sp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,57 +31,60 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name of Trip"
-            android:textSize="30dp">
-        </TextView>
+            android:textSize="30sp" />
 
         <EditText
+            android:id="@+id/tripName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: Australia"
-            android:textSize="15dp">
-        </EditText>
+            android:inputType="text"
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Number of Days"
-            android:textSize="30dp">
-        </TextView>
+            android:textSize="30sp" />
+
         <EditText
+            android:id="@+id/numDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: 46"
             android:inputType="number"
-            android:textSize="15dp">
-        </EditText>
+            android:textSize="15sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Total Amount"
-            android:textSize="30dp">
-        </TextView>
+            android:textSize="30sp" />
+
         <EditText
+            android:id="@+id/totalAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: ¥500,000"
             android:inputType="number"
-            android:textSize="15dp">
-        </EditText>
+            android:textSize="15sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Category"
-            android:textSize="30dp">
-        </TextView>
+            android:textSize="30sp" />
+
         <EditText
+            android:id="@+id/categoryNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: 3"
             android:inputType="number"
-            android:textSize="15dp">
-        </EditText>
+            android:textSize="15sp" />
     </LinearLayout>
+
 </LinearLayout>

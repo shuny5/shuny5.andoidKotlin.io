@@ -4,7 +4,7 @@ import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-//import android.service.autofill.UserData
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -39,19 +39,19 @@ class RegistrationActivity : AppCompatActivity() {
         val passCon = confirmPass.text.trim().toString()
 
         val logSuccess = Intent(this, Home::class.java)
-        var helper = DatabaseHandler(applicationContext)
-        var db = helper.readableDatabase
-//        var rs = db.rawQuery("SELECT * FROM USERS", null)
+
+        val helper = DatabaseHandler(applicationContext)
+        val db = helper.readableDatabase
 
         if (email.text.trim().isNotEmpty() and passwordLogin.text.trim()
                 .isNotEmpty() and confirmPass.text.trim().isNotEmpty()
         ) {
             if (password == passCon) {
-                var cv = ContentValues()
-                cv.put("USERNAME", email.text.toString())
+                val cv = ContentValues()
+
+                cv.put("EMAIL", email.text.toString())
                 cv.put("PASSWORD", password)
                 db.insert("USERS", null, cv)
-
                 Toast.makeText(this, "Register Complete", Toast.LENGTH_LONG).show()
                 startActivity(logSuccess)
             } else {
