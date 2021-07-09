@@ -1,6 +1,8 @@
 package com.example.budgettracker
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         val signupReg: TextView = findViewById(R.id.loginReg)
 
         val register = Intent(this, RegistrationActivity::class.java)
+
 
         button.setOnClickListener {
             checkAccount()
@@ -43,11 +47,17 @@ class MainActivity : AppCompatActivity() {
             val rs =
                 db.rawQuery("SELECT * FROM USERS WHERE EMAIL = ? AND PASSWORD = ?", dbInfo)
             if (rs.moveToNext()) {
+
+                //get ID with email credentials
                 userID = getID(enterEmail)
-//                saveID( ,userID)
-                rs.close()
+
+                //save ID
+                saveID(userID)
+
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
-                //Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
+                rs.close()
+
+                //go to home page
                 startActivity(login)
             } else {
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()
@@ -71,9 +81,14 @@ class MainActivity : AppCompatActivity() {
         cursor.close()
         return id
     }
-//    fun saveID(Key_Name: String, value: Int){
-//        val editor: SharedPreferences.Editor = sharedPref.edit()
-//        editor.putInt(KEY_NAME, value)
-//        editor.commit()
-//    }
+    fun saveID(userID: Int){
+
+        val savedID: Int = 0
+
+        val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.apply{
+            putInt("INT_ID", savedID)
+        }
+    }
 }

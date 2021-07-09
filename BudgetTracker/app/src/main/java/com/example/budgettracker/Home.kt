@@ -1,6 +1,8 @@
 package com.example.budgettracker
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.database.Cursor
 import android.os.Bundle
@@ -17,20 +19,13 @@ class Home : AppCompatActivity() {
         var tripTitle = ""
         var daysRem = ""
         var balanceRem = ""
-        var id = 0
+
+        var savedID = loadID()
 
         val helper = DatabaseHandler(applicationContext)
         val db = helper.readableDatabase
         val dbInfo = listOf<String>(tripTitle, daysRem, balanceRem).toTypedArray()
-        //val rs: Cursor = db.rawQuery("SELECT * FROM USERS WHERE USERID LIKE ")
-
-//        var catOne = ""
-//        var catTwo = ""
-//        var catThree = ""
-//
-//        var dailyCatOne = catOne.toDouble() / daysRem.toDouble()
-//        var dailyCatTwo = catTwo.toDouble() / daysRem.toDouble()
-//        var dailyCatThree = catThree.toDouble() / daysRem.toDouble()
+        val rs: Cursor = db.rawQuery("SELECT * FROM TRIPS WHERE USERID = ?", dbInfo)
 
         val title: TextView = findViewById(R.id.tripName)
         title.text = tripTitle
@@ -45,6 +40,11 @@ class Home : AppCompatActivity() {
             val newTrip = Intent(this, NewTrip::class.java)
             startActivity(newTrip)
         }
+    }
+    fun loadID() : Int{
+        val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val savedID:Int = sharedPreferences.getInt("INT_ID", 0)
+        return savedID
     }
 
 }
