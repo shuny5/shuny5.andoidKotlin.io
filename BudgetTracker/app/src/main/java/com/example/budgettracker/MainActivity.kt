@@ -1,11 +1,9 @@
 package com.example.budgettracker
 
-//import android.content.ContentValues
 import android.content.Intent
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-//import android.provider.ContactsContract
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -34,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         val passwordLogin: EditText = findViewById(R.id.passwordLogin)
         val enterEmail = emailLogin.text.trim().toString()
         val enterPass = passwordLogin.text.trim().toString()
+        var userID: Int
 
         val login = Intent(this, Home::class.java)
         val helper = DatabaseHandler(applicationContext)
@@ -41,10 +40,14 @@ class MainActivity : AppCompatActivity() {
 
         if (emailLogin.text.trim().isNotEmpty() and passwordLogin.text.trim().isNotEmpty()) {
             val dbInfo = listOf<String>(enterEmail, enterPass).toTypedArray()
-            val rs: Cursor = db.rawQuery("SELECT * FROM USERS WHERE EMAIL = ? AND PASSWORD = ?", dbInfo)
+            val rs =
+                db.rawQuery("SELECT * FROM USERS WHERE EMAIL = ? AND PASSWORD = ?", dbInfo)
             if (rs.moveToNext()) {
+                userID = getID(enterEmail)
+//                saveID( ,userID)
                 rs.close()
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
                 startActivity(login)
             } else {
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_LONG).show()
@@ -53,4 +56,24 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Input Required", Toast.LENGTH_LONG).show()
         }
     }
+    private fun getID(enterEmail: String): Int {
+       // val dbInfo = listOf<String>(enterEmail).toTypedArray()
+        var id: Int
+
+        val helper = DatabaseHandler(applicationContext)
+        val db = helper.readableDatabase
+        val selectQuery = "SELECT * FROM USERS WHERE USERID = ?"
+        var cursor: Cursor? = null
+
+        cursor = db.rawQuery(selectQuery, null)
+        id = cursor.getInt(1)
+
+        cursor.close()
+        return id
+    }
+//    fun saveID(Key_Name: String, value: Int){
+//        val editor: SharedPreferences.Editor = sharedPref.edit()
+//        editor.putInt(KEY_NAME, value)
+//        editor.commit()
+//    }
 }

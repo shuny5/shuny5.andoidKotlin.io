@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -38,7 +37,7 @@ class RegistrationActivity : AppCompatActivity() {
         val password = passwordLogin.text.trim().toString()
         val passCon = confirmPass.text.trim().toString()
 
-        val logSuccess = Intent(this, Home::class.java)
+        val regSuccess = Intent(this, Home::class.java)
 
         val helper = DatabaseHandler(applicationContext)
         val db = helper.readableDatabase
@@ -53,7 +52,7 @@ class RegistrationActivity : AppCompatActivity() {
                 cv.put("PASSWORD", password)
                 db.insert("USERS", null, cv)
                 Toast.makeText(this, "Register Complete", Toast.LENGTH_LONG).show()
-                startActivity(logSuccess)
+                startActivity(regSuccess)
             } else {
                 Toast.makeText(this, "Password does not match", Toast.LENGTH_LONG).show()
             }

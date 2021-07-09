@@ -6,4 +6,6 @@
     <string name="reg">Registration</string>
     <string name="TitleHome">Welcome</string>
     <string name="tripTitle">Trip Ex</string>
+    <string name="currency">¥</string>
+    <string name="none">N/A</string>
 </resources>
