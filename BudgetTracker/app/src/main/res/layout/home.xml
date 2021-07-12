@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Welcome"
+        android:text="@string/welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="50sp" />
 
@@ -38,7 +38,6 @@
             android:layout_marginStart="75dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="Trip Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
 
             android:textSize="30sp" />
@@ -54,9 +53,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="Remaining Total:"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -65,10 +64,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/border"
                 android:padding="15dp"
-                android:text="Total"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         </LinearLayout>
@@ -86,8 +85,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/border"
-                android:padding="15dp"
-                android:text="Days Remaining"
+                android:padding="12dp"
+                android:layout_margin="10dp"
+                android:text="Remaining Days"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -98,6 +98,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:padding="15dp"
+                android:background="@drawable/border"
+                android:layout_margin="10dp"
                 android:text="Total Days"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -116,7 +118,12 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/border"
-                android:text="Category 1"
+                android:text="Category"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:layout_margin="10dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -129,6 +136,7 @@
                 android:background="@drawable/border"
                 android:padding="15dp"
                 android:text="Total"
+                android:layout_margin="10dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -140,100 +148,100 @@
                 android:layout_weight="1"
                 android:background="@drawable/border"
                 android:padding="15dp"
-                android:text="Daily Amount"
+                android:layout_margin="10dp"
+                android:text="Daily"
 
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
 
-            <TextView
-                android:id="@+id/categoryTwo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:text="@string/none"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+<!--            <TextView-->
+<!--                android:id="@+id/categoryTwo"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/border"-->
+<!--                android:text="@string/none"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
 
-            <TextView
-                android:id="@+id/c2Amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:padding="15dp"
-                android:text="@string/none"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+<!--            <TextView-->
+<!--                android:id="@+id/c2Amount"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/border"-->
+<!--                android:padding="15dp"-->
+<!--                android:text="@string/none"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
 
-            <TextView
-                android:id="@+id/c2Daily"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:padding="15dp"
-                android:text="@string/none"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/c2Daily"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/border"-->
+<!--                android:padding="15dp"-->
+<!--                android:text="@string/none"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+<!--        </LinearLayout>-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
 
-            <TextView
-                android:id="@+id/categoryThree"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:text="@string/none"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+<!--            <TextView-->
+<!--                android:id="@+id/categoryThree"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/border"-->
+<!--                android:text="@string/none"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
 
-            <TextView
-                android:id="@+id/c3Amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:padding="15dp"
-                android:text="@string/none"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+<!--            <TextView-->
+<!--                android:id="@+id/c3Amount"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/border"-->
+<!--                android:padding="15dp"-->
+<!--                android:text="@string/none"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
 
-            <TextView
-                android:id="@+id/c3Daily"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:padding="15dp"
-                android:text="@string/none"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/c3Daily"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/border"-->
+<!--                android:padding="15dp"-->
+<!--                android:text="@string/none"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
             android:background="@drawable/border"
             android:orientation="horizontal">
 
@@ -264,6 +272,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:padding="5dp">
 
@@ -287,7 +296,7 @@
                 android:text="+"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="20dp">
+                android:textSize="20sp">
             </Button>
 
         </LinearLayout>

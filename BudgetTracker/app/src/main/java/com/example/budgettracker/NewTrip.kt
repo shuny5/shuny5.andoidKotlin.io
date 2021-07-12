@@ -1,7 +1,9 @@
 package com.example.budgettracker
 
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -36,6 +38,9 @@ class NewTrip : AppCompatActivity() {
         val db = helper.readableDatabase
         val cv = ContentValues()
 
+        val userID = loadID()
+
+        cv.put("USERID", userID)
         cv.put("TRIP", trip)
         cv.put("DAYS", days)
         cv.put("TOTAL", total)
@@ -43,5 +48,13 @@ class NewTrip : AppCompatActivity() {
 
         Toast.makeText(this, "Trip Created!", Toast.LENGTH_LONG).show()
         startActivity(save)
+    }
+
+    private fun loadID(): Int {
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        //        Toast.makeText(this, "Key #" + userID, Toast.LENGTH_LONG).show()
+        return sharedPreferences.getInt("USER_ID", 0)
+
     }
 }

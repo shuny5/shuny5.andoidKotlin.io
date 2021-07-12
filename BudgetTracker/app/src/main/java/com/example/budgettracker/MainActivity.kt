@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         val register = Intent(this, RegistrationActivity::class.java)
 
-
         button.setOnClickListener {
             checkAccount()
         }
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 //save ID
                 saveID(userID)
 
-                Toast.makeText(this, "Login Successful$userID", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
                 rs.close()
 
                 //go to home page
@@ -90,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.apply {
-            putInt("INT_ID", userID)
-        }
+            putInt("USER_ID", userID)
+        }.apply()
     }
 }

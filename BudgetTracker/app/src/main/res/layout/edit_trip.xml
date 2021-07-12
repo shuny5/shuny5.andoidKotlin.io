@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="New Expenses"
+        android:text="Edit Trip"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="60sp" />
 
@@ -29,14 +29,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Expense"
+            android:text="Name of Trip"
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/item"
+            android:id="@+id/tripName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ex: McDonald"
+            android:hint="Ex: Australia"
             android:inputType="text"
             android:textSize="15sp" />
 
@@ -44,23 +44,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Price"
+            android:text="Number of Days"
             android:textSize="30sp" />
 
-        <!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:text="Total Amount"-->
-<!--            android:textSize="30sp" />-->
+        <EditText
+            android:id="@+id/numDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: 46"
+            android:inputType="number"
+            android:textSize="15sp" />
 
-<!--        <EditText-->
-<!--            android:id="@+id/totalAmount"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Ex: ¥500,000"-->
-<!--            android:inputType="number"-->
-<!--            android:textSize="15sp" />-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Total Amount"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/totalAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: ¥500,000"
+            android:inputType="number"
+            android:textSize="15sp" />
 
         <!--        <TextView-->
         <!--            android:layout_width="match_parent"-->
@@ -76,14 +84,6 @@
         <!--            android:hint="Ex: 3"-->
         <!--            android:inputType="number"-->
         <!--            android:textSize="15sp" />-->
-        <EditText
-            android:id="@+id/price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ex: ¥1532"
-            android:inputType="number"
-            android:textSize="15sp" />
-
         <Button
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"

@@ -1,7 +1,9 @@
 package com.example.budgettracker
 
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -30,10 +32,11 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     private fun addAccount() {
-        val email: EditText = findViewById(R.id.emailLogin)
+        val emailLogin: EditText = findViewById(R.id.emailLogin)
         val passwordLogin: EditText = findViewById(R.id.passwordLogin)
         val confirmPass: EditText = findViewById(R.id.confirmPass)
 
+        val email = emailLogin.text.trim().toString()
         val password = passwordLogin.text.trim().toString()
         val passCon = confirmPass.text.trim().toString()
 
@@ -42,15 +45,24 @@ class RegistrationActivity : AppCompatActivity() {
         val helper = DatabaseHandler(applicationContext)
         val db = helper.readableDatabase
 
-        if (email.text.trim().isNotEmpty() and passwordLogin.text.trim()
+        //check if filled in
+        if (email.isNotEmpty() and passwordLogin.text.trim()
                 .isNotEmpty() and confirmPass.text.trim().isNotEmpty()
         ) {
+            //check if passwords match
             if (password == passCon) {
                 val cv = ContentValues()
 
-                cv.put("EMAIL", email.text.toString())
+                cv.put("EMAIL", email)
                 cv.put("PASSWORD", password)
                 db.insert("USERS", null, cv)
+
+                //get user ID to access other databases
+                val userID = getID(email)
+
+                //save user ID to be used later
+                saveID(userID)
+
                 Toast.makeText(this, "Register Complete", Toast.LENGTH_LONG).show()
                 startActivity(regSuccess)
             } else {
@@ -59,5 +71,34 @@ class RegistrationActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Input Required", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun getID(email: String): Int {
+        val id: Int
+        val dbInfo = listOf(email).toTypedArray()
+        val helper = DatabaseHandler(applicationContext)
+        val db = helper.readableDatabase
+
+        //use email to fetch USERID
+        val selectQuery = "SELECT USERID FROM USERS WHERE EMAIL = ?"
+        val rs = db.rawQuery(selectQuery, dbInfo)
+
+        if (rs.moveToNext()) {
+            id = rs.getInt(0)
+            rs.close()
+            return id
+        }
+        rs.close()
+        return -1
+    }
+
+    private fun saveID(userID: Int) {
+
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.apply {
+            putInt("USER_ID", userID)
+        }.apply()
     }
 }
