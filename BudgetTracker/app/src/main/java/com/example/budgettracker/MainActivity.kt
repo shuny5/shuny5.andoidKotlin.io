@@ -3,7 +3,6 @@ package com.example.budgettracker
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -36,14 +35,14 @@ class MainActivity : AppCompatActivity() {
         val passwordLogin: EditText = findViewById(R.id.passwordLogin)
         val enterEmail = emailLogin.text.trim().toString()
         val enterPass = passwordLogin.text.trim().toString()
-        var userID: Int
+        val userID: Int
 
         val login = Intent(this, Home::class.java)
         val helper = DatabaseHandler(applicationContext)
         val db = helper.readableDatabase
 
         if (emailLogin.text.trim().isNotEmpty() and passwordLogin.text.trim().isNotEmpty()) {
-            val dbInfo = listOf<String>(enterEmail, enterPass).toTypedArray()
+            val dbInfo = listOf(enterEmail, enterPass).toTypedArray()
             val rs =
                 db.rawQuery("SELECT * FROM USERS WHERE EMAIL = ? AND PASSWORD = ?", dbInfo)
             if (rs.moveToNext()) {
@@ -54,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 //save ID
                 saveID(userID)
 
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Login Successful$userID", Toast.LENGTH_LONG).show()
                 rs.close()
 
                 //go to home page
@@ -66,29 +65,32 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Input Required", Toast.LENGTH_LONG).show()
         }
     }
-    private fun getID(enterEmail: String): Int {
-       // val dbInfo = listOf<String>(enterEmail).toTypedArray()
-        var id: Int
 
+    private fun getID(enterEmail: String): Int {
+        val id: Int
+        val dbInfo = listOf(enterEmail).toTypedArray()
         val helper = DatabaseHandler(applicationContext)
         val db = helper.readableDatabase
-        val selectQuery = "SELECT * FROM USERS WHERE USERID = ?"
-        var cursor: Cursor? = null
 
-        cursor = db.rawQuery(selectQuery, null)
-        id = cursor.getInt(1)
+        val selectQuery = "SELECT USERID FROM USERS WHERE EMAIL = ?"
+        val rs = db.rawQuery(selectQuery, dbInfo)
 
-        cursor.close()
-        return id
+        if (rs.moveToNext()) {
+            id = rs.getInt(0)
+            rs.close()
+            return id
+        }
+        rs.close()
+        return -1
     }
-    fun saveID(userID: Int){
 
-        val savedID: Int = 0
+    private fun saveID(userID: Int) {
 
-        val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.apply{
-            putInt("INT_ID", savedID)
+        editor.apply {
+            putInt("INT_ID", userID)
         }
     }
 }

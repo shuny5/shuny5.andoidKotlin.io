@@ -238,6 +238,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/addExpns"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
@@ -248,6 +249,7 @@
             </Button>
 
             <Button
+                android:id="@+id/editTrip"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

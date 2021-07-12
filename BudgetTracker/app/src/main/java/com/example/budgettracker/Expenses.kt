@@ -8,27 +8,25 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class NewTrip : AppCompatActivity() {
+class Expenses : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.new_trip)
+        setContentView(R.layout.expenses)
 
         val btnSave: Button = findViewById(R.id.btn_save)
 
         btnSave.setOnClickListener {
-            createTrip()
+            createExpense()
         }
     }
 
-    private fun createTrip() {
-        val tripName: EditText = findViewById(R.id.tripName)
-        val numDays: EditText = findViewById(R.id.numDays)
-        val totalAmount: EditText = findViewById(R.id.totalAmount)
+    private fun createExpense() {
+        val itemName: EditText = findViewById(R.id.item)
+        val itemPrice: EditText = findViewById(R.id.price)
 
-        val trip = tripName.text.trim().toString()
-        val days = numDays.text.trim().toString()
-        val total = totalAmount.text.trim().toString()
+        val item = itemName.text.trim().toString()
+        val price = itemPrice.text.trim().toString()
 
         val save = Intent(this, Home::class.java)
 
@@ -36,12 +34,11 @@ class NewTrip : AppCompatActivity() {
         val db = helper.readableDatabase
         val cv = ContentValues()
 
-        cv.put("TRIP", trip)
-        cv.put("DAYS", days)
-        cv.put("TOTAL", total)
-        db.insert("TRIPS", null, cv)
+        cv.put("ITEM", item)
+        cv.put("PRICE", price)
+        db.insert("ITEMS", null, cv)
 
-        Toast.makeText(this, "Trip Created!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Expense Added!", Toast.LENGTH_LONG).show()
         startActivity(save)
     }
 }

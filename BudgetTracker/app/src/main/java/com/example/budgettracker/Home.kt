@@ -3,10 +3,7 @@ package com.example.budgettracker
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Resources
-import android.database.Cursor
 import android.os.Bundle
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
@@ -25,7 +22,8 @@ class Home : AppCompatActivity() {
         val helper = DatabaseHandler(applicationContext)
         val db = helper.readableDatabase
         val dbInfo = listOf<String>(tripTitle, daysRem, balanceRem).toTypedArray()
-        val rs: Cursor = db.rawQuery("SELECT * FROM TRIPS WHERE USERID = ?", dbInfo)
+
+        var tripInfo = listOf<String>().toTypedArray()
 
         val title: TextView = findViewById(R.id.tripName)
         title.text = tripTitle
@@ -35,16 +33,29 @@ class Home : AppCompatActivity() {
         remDays.text = (daysRem)
 
         val btnAdd: Button = findViewById(R.id.addTrip)
+        val btnAddEx: Button = findViewById(R.id.addExpns)
+        val btnEdit: Button = findViewById(R.id.editTrip)
 
         btnAdd.setOnClickListener {
             val newTrip = Intent(this, NewTrip::class.java)
             startActivity(newTrip)
         }
+
+        btnAddEx.setOnClickListener {
+            val newItem = Intent(this, Expenses::class.java)
+            startActivity(newItem)
+        }
+
+//        btnEdit.setOnClickListener{
+//            val editTrip = Intent(this, EditTrip::class.java)
+//            startActivity(editTrip)
+//        }
     }
-    fun loadID() : Int{
-        val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val savedID:Int = sharedPreferences.getInt("INT_ID", 0)
-        return savedID
+
+    fun loadID(): Int {
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getInt("INT_ID", 0)
     }
 
 }
