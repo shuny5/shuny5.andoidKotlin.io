@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 
-class RegistrationActivity : AppCompatActivity() {
+class Registration : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class RegistrationActivity : AppCompatActivity() {
         }
         //login page
         logIn.setOnClickListener {
-            val signUp = Intent(this, MainActivity::class.java)
+            val signUp = Intent(this, Login::class.java)
             startActivity(signUp)
         }
     }
@@ -49,28 +49,43 @@ class RegistrationActivity : AppCompatActivity() {
         if (email.isNotEmpty() and passwordLogin.text.trim()
                 .isNotEmpty() and confirmPass.text.trim().isNotEmpty()
         ) {
-            //check if passwords match
-            if (password == passCon) {
-                val cv = ContentValues()
+            //check if email is unique
+            if (uniqueEmail(email)) {
+                //check if passwords match
+                if (password == passCon) {
+                    val cv = ContentValues()
+                    cv.put("EMAIL", email)
+                    cv.put("PASSWORD", password)
+                    db.insert("USERS", null, cv)
+                    //get user ID to access other databases
+                    val userID = getID(email)
+                    //save user ID to be used later
+                    saveID(userID)
 
-                cv.put("EMAIL", email)
-                cv.put("PASSWORD", password)
-                db.insert("USERS", null, cv)
-
-                //get user ID to access other databases
-                val userID = getID(email)
-
-                //save user ID to be used later
-                saveID(userID)
-
-                Toast.makeText(this, "Register Complete", Toast.LENGTH_LONG).show()
-                startActivity(regSuccess)
+                    Toast.makeText(this, "Register Complete $userID", Toast.LENGTH_LONG).show()
+                    startActivity(regSuccess)
+                } else {
+                    Toast.makeText(this, "Password does not match", Toast.LENGTH_LONG).show()
+                }
             } else {
-                Toast.makeText(this, "Password does not match", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Email is already Registered", Toast.LENGTH_LONG).show()
             }
+
         } else {
             Toast.makeText(this, "Input Required", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun uniqueEmail(email: String): Boolean {
+        val helper = DatabaseHandler(applicationContext)
+        val db = helper.readableDatabase
+        val dbInfo = listOf(email).toTypedArray()
+        val rs = db.rawQuery("SELECT EMAIL FROM USERS WHERE EMAIL = ?", dbInfo)
+        if (!rs.moveToNext()) {
+            return true
+        }
+        rs.close()
+        return false
     }
 
     private fun getID(email: String): Int {

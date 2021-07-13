@@ -1,12 +1,15 @@
 package com.example.budgettracker
 
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.net.IDN
 
 class Expenses : AppCompatActivity() {
 
@@ -38,7 +41,18 @@ class Expenses : AppCompatActivity() {
         cv.put("PRICE", price)
         db.insert("ITEMS", null, cv)
 
+        var tripID = loadTripID()
+        updateTotal(tripID)
+
         Toast.makeText(this, "Expense Added!", Toast.LENGTH_LONG).show()
         startActivity(save)
+    }
+    private fun loadTripID() :Int {
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getInt("TRIP_ID", 0)
+    }
+    private fun updateTotal(tripID: Int){
+
     }
 }

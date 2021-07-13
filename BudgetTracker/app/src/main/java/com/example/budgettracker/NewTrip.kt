@@ -47,14 +47,44 @@ class NewTrip : AppCompatActivity() {
         db.insert("TRIPS", null, cv)
 
         Toast.makeText(this, "Trip Created!", Toast.LENGTH_LONG).show()
+
+        val tripID = getTripID(trip)
+        Toast.makeText(this, tripID.toString(), Toast.LENGTH_SHORT).show()
+        saveTripID(tripID)
         startActivity(save)
+    }
+
+    private fun getTripID(trip: String): Int {
+        val tID: Int
+        val dbInfo = listOf(trip).toTypedArray()
+        val helper = DatabaseHandler(applicationContext)
+        val db = helper.readableDatabase
+
+        val selectQuery = "SELECT TRIPID FROM TRIPS WHERE TRIP = ?"
+        val rs = db.rawQuery(selectQuery, dbInfo)
+
+        if (rs.moveToNext()) {
+            tID = rs.getInt(0)
+            rs.close()
+            return tID
+        }
+        rs.close()
+        return 0
+    }
+
+    private fun saveTripID(tripID: Int) {
+
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.apply {
+            putInt("TRIP_ID", tripID)
+        }.apply()
     }
 
     private fun loadID(): Int {
         val sharedPreferences: SharedPreferences =
             getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        //        Toast.makeText(this, "Key #" + userID, Toast.LENGTH_LONG).show()
         return sharedPreferences.getInt("USER_ID", 0)
-
     }
 }

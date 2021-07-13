@@ -10,7 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 
-class MainActivity : AppCompatActivity() {
+class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val button: Button = findViewById(R.id.btnLogin)
         val signupReg: TextView = findViewById(R.id.loginReg)
 
-        val register = Intent(this, RegistrationActivity::class.java)
+        val register = Intent(this, Registration::class.java)
 
         button.setOnClickListener {
             checkAccount()
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 //save ID
                 saveID(userID)
 
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Login Successful $userID", Toast.LENGTH_LONG).show()
                 rs.close()
 
                 //go to home page
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             return id
         }
         rs.close()
-        return -1
+        return 0
     }
 
     private fun saveID(userID: Int) {
