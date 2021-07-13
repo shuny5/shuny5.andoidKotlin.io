@@ -42,10 +42,13 @@ class Home : AppCompatActivity() {
             val txtRemDays: TextView = findViewById(R.id.remDays)
             val txtAverageRem: TextView = findViewById(R.id.remPerDay)
 
+            val remDays = 5
+            val remPerDay = (getTotalPerDay(remDays,balanceRem.toInt()))
+
             txtTitle.text = "Trip to: $tripTitle"
             txtRemTotal.text = "Remaining: ¥$balanceRem"
-//            txtRemDays.text = "$remDays Days out of $totalDays"
-//            txtAverageRem.text = "¥$remPerDay per Day"
+            txtRemDays.text = "$remDays Days out of $totalDays"
+            txtAverageRem.text = "¥$remPerDay per Day"
             //default when table is empty
         } else {
             val tripTitle = "Create a new Trip!"

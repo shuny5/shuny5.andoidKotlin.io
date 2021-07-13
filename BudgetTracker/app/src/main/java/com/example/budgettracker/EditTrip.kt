@@ -41,6 +41,8 @@ class EditTrip : AppCompatActivity() {
         val userID = ids[0]
         val tripID = ids[1]
         Toast.makeText(this, tripID, Toast.LENGTH_SHORT).show()
+
+
 //        val tripInfo: Array<String> = getTripInfo()
 //        if(tripInfo.isNotEmpty()){
 //            val tripTitle = tripInfo[0]
