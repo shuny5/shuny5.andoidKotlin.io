@@ -16,14 +16,15 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button: Button = findViewById(R.id.btnLogin)
+        val login: Button = findViewById(R.id.btnLogin)
         val signupReg: TextView = findViewById(R.id.loginReg)
-
         val register = Intent(this, Registration::class.java)
 
-        button.setOnClickListener {
+        // Login button
+        login.setOnClickListener {
             checkAccount()
         }
+        // Sign up button
         signupReg.setOnClickListener {
             startActivity(register)
         }
@@ -45,16 +46,13 @@ class Login : AppCompatActivity() {
             val rs =
                 db.rawQuery("SELECT * FROM USERS WHERE EMAIL = ? AND PASSWORD = ?", dbInfo)
             if (rs.moveToNext()) {
-
                 //get ID with email credentials
                 userID = getID(enterEmail)
-
                 //save ID
                 saveID(userID)
 
                 Toast.makeText(this, "Login Successful $userID", Toast.LENGTH_LONG).show()
                 rs.close()
-
                 //go to home page
                 startActivity(login)
             } else {

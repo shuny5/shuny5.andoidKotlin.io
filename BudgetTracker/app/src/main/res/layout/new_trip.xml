@@ -44,15 +44,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Number of Days"
+            android:text="Start Date"
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/numDays"
+            android:id="@+id/startDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ex: 46"
-            android:inputType="number"
+            android:hint="Ex: 08/10/2020"
+            android:inputType="date"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="End Date"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/endDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: 09/05/2020"
+            android:inputType="date"
             android:textSize="15sp" />
 
         <TextView

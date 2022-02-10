@@ -25,11 +25,13 @@ class NewTrip : AppCompatActivity() {
 
     private fun createTrip() {
         val tripName: EditText = findViewById(R.id.tripName)
-        val numDays: EditText = findViewById(R.id.numDays)
+        val startDate: EditText = findViewById(R.id.startDate)
+        val endDate: EditText = findViewById(R.id.endDate)
         val totalAmount: EditText = findViewById(R.id.totalAmount)
 
         val trip = tripName.text.trim().toString()
-        val days = numDays.text.trim().toString()
+        val startDay = startDate.text.trim().toString()
+        val endDay = endDate.text.trim().toString()
         val total = totalAmount.text.trim().toString()
 
         val save = Intent(this, Home::class.java)
@@ -39,19 +41,22 @@ class NewTrip : AppCompatActivity() {
         val cv = ContentValues()
 
         val userID = loadID()
+        if(tripName.text.trim().isNotEmpty() and startDate.text.trim().isNotEmpty() and endDate.text.trim().isNotEmpty() and totalAmount.text.trim().isNotEmpty()) {
+            cv.put("USERID", userID)
+            cv.put("TRIP", trip)
+            cv.put("STARTDATE", startDay)
+            cv.put("ENDDATE", endDay)
+            cv.put("TOTAL", total)
+            db.insert("TRIPS", null, cv)
 
-        cv.put("USERID", userID)
-        cv.put("TRIP", trip)
-        cv.put("DAYS", days)
-        cv.put("TOTAL", total)
-        db.insert("TRIPS", null, cv)
-
-        Toast.makeText(this, "Trip Created!", Toast.LENGTH_LONG).show()
-
-        val tripID = getTripID(trip)
-        Toast.makeText(this, tripID.toString(), Toast.LENGTH_SHORT).show()
-        saveTripID(tripID)
-        startActivity(save)
+            Toast.makeText(this, "Trip Created!", Toast.LENGTH_LONG).show()
+            val tripID = getTripID(trip)
+            Toast.makeText(this, tripID.toString(), Toast.LENGTH_SHORT).show()
+            saveTripID(tripID)
+            startActivity(save)
+        }else{
+            Toast.makeText(this, "All Info Required", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun getTripID(trip: String): Int {

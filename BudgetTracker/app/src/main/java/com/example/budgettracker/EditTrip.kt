@@ -19,7 +19,7 @@ class EditTrip : AppCompatActivity() {
         val btnSave: Button = findViewById(R.id.btn_save)
 
         btnSave.setOnClickListener {
-            editTrip()
+//            editTrip()
         }
     }
 
@@ -50,10 +50,11 @@ class EditTrip : AppCompatActivity() {
 //            val balanceRem = tripInfo[2]
 //        }
 
-//        cv.put("TRIP", trip)
-//        cv.put("DAYS", days)
-//        cv.put("TOTAL", total)
-//        db.insert("TRIPS", null, cv)
+        //update table with new values
+        cv.put("TRIP", trip)
+        cv.put("DAYS", days)
+        cv.put("TOTAL", total)
+//        db.update("TRIPS", cv, )
 
         startActivity(save)
 

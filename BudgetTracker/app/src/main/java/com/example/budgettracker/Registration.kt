@@ -20,11 +20,11 @@ class Registration : AppCompatActivity() {
         val btnReg: Button = findViewById(R.id.btn_reg)
         val logIn: TextView = findViewById(R.id.logIn)
 
-        //register account
+        // Register account
         btnReg.setOnClickListener {
             addAccount()
         }
-        //login page
+        // Login page
         logIn.setOnClickListener {
             val signUp = Intent(this, Login::class.java)
             startActivity(signUp)
@@ -45,21 +45,21 @@ class Registration : AppCompatActivity() {
         val helper = DatabaseHandler(applicationContext)
         val db = helper.readableDatabase
 
-        //check if filled in
+        // Check if filled in
         if (email.isNotEmpty() and passwordLogin.text.trim()
                 .isNotEmpty() and confirmPass.text.trim().isNotEmpty()
         ) {
-            //check if email is unique
+            // Check if email is unique
             if (uniqueEmail(email)) {
-                //check if passwords match
+                // Check if passwords match
                 if (password == passCon) {
                     val cv = ContentValues()
                     cv.put("EMAIL", email)
                     cv.put("PASSWORD", password)
                     db.insert("USERS", null, cv)
-                    //get user ID to access other databases
+                    // Get user ID to access other user data
                     val userID = getID(email)
-                    //save user ID to be used later
+                    // Save user ID to be used later
                     saveID(userID)
 
                     Toast.makeText(this, "Register Complete $userID", Toast.LENGTH_LONG).show()
@@ -94,7 +94,7 @@ class Registration : AppCompatActivity() {
         val helper = DatabaseHandler(applicationContext)
         val db = helper.readableDatabase
 
-        //use email to fetch USERID
+        // Use email to fetch USERID
         val selectQuery = "SELECT USERID FROM USERS WHERE EMAIL = ?"
         val rs = db.rawQuery(selectQuery, dbInfo)
 
